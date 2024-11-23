@@ -408,9 +408,22 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCekCuacaActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        try (FileWriter writer = new FileWriter("dataCuaca.csv", true)) {
-        writer.append(txtCariNamaKota.getText() + "," + lblCuaca.getText() + "," + lblSuhu.getText() + "\n");
-        JOptionPane.showMessageDialog(this, "Data cuaca berhasil disimpan ke file!");
+         try {
+        // Tentukan jalur folder dan file
+        String folderPath = "DataCuaca"; // Nama folder
+        String filePath = folderPath + "/dataCuaca.csv"; // File di dalam folder
+
+        // Buat folder jika belum ada
+        java.io.File folder = new java.io.File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdir(); // Buat folder
+        }
+
+        // Tulis data ke file
+        try (FileWriter writer = new FileWriter(filePath, true)) { // 'true' untuk append
+            writer.append(txtCariNamaKota.getText() + "," + lblCuaca.getText() + "," + lblSuhu.getText() + "\n");
+            JOptionPane.showMessageDialog(this, "Data cuaca berhasil disimpan ke folder " + folderPath + "!");
+        }
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
