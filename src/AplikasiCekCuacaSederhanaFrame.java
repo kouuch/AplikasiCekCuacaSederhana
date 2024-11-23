@@ -372,14 +372,33 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
         return;
     }
 
-    // Array cuaca dan suhu yang akan dipilih secara random
+    // Array cuaca dan rentang suhu yang sesuai
     String[] cuacaArray = {"Cerah", "Hujan", "Berawan", "Gerimis", "Badai"};
-    String[] suhuArray = {"25°C", "30°C", "28°C", "33°C", "22°C", "35°C", "27°C", "29°C", "26°C", "32°C", "31°C", "24°C", "20°C", "21°C", "23°C", "34°C", "36°C", "37°C", "38°C", "40°C"};
-
-    // Pilih cuaca dan suhu secara random
     java.util.Random random = new java.util.Random();
+
     String cuacaRandom = cuacaArray[random.nextInt(cuacaArray.length)];
-    String suhuRandom = suhuArray[random.nextInt(suhuArray.length)];
+    String suhuRandom;
+
+    // Tentukan rentang suhu berdasarkan cuaca
+    switch (cuacaRandom) {
+        case "Cerah":
+            suhuRandom = (30 + random.nextInt(11)) + "°C"; // 30°C - 40°C
+            break;
+        case "Hujan":
+            suhuRandom = (5 + random.nextInt(6)) + "°C"; // 5°C - 10°C
+            break;
+        case "Berawan":
+            suhuRandom = (20 + random.nextInt(6)) + "°C"; // 20°C - 25°C
+            break;
+        case "Gerimis":
+            suhuRandom = (15 + random.nextInt(6)) + "°C"; // 15°C - 20°C
+            break;
+        case "Badai":
+            suhuRandom = (10 + random.nextInt(6)) + "°C"; // 10°C - 15°C
+            break;
+        default:
+            suhuRandom = "N/A"; // Default, seharusnya tidak tercapai
+    }
 
     // Set nilai pada label
     lblCuaca.setText("Cuaca : " + cuacaRandom);
