@@ -371,8 +371,8 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
         return;
     }
     // Contoh data statis, ubah dengan integrasi API
-    lblCuaca.setText("Cerah");
-    lblSuhu.setText("30°C");
+    lblCuaca.setText("Cuaca : " + "Cerah");
+    lblSuhu.setText("Suhu : " + "30°C");
     JOptionPane.showMessageDialog(this, "Cuaca berhasil diperbarui untuk kota: " + kota);
     }//GEN-LAST:event_btnCekCuacaActionPerformed
 
