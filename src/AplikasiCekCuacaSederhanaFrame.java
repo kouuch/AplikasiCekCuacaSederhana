@@ -350,16 +350,30 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahFavoritActionPerformed
 
     private void btnMuatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuatDataActionPerformed
-        try {
-        BufferedReader reader = new BufferedReader(new FileReader("dataCuaca.csv"));
+         try {
+        // Tentukan jalur folder dan file
+        String folderPath = "DataCuaca"; // Nama folder
+        String filePath = folderPath + "/dataCuaca.csv"; // File di dalam folder
+
+        // Periksa apakah folder dan file ada
+        java.io.File file = new java.io.File(filePath);
+        if (!file.exists()) {
+            JOptionPane.showMessageDialog(this, "File dataCuaca.csv tidak ditemukan di folder " + folderPath, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Baca file
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
         model.setRowCount(0); // Hapus semua baris sebelumnya
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            model.addRow(data);
+            model.addRow(data); // Tambahkan data ke tabel
         }
         reader.close();
+
+        JOptionPane.showMessageDialog(this, "Data berhasil dimuat dari folder " + folderPath + "!");
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Gagal membaca file data cuaca: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
