@@ -23,8 +23,24 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     public AplikasiCekCuacaSederhanaFrame() {
         initComponents();
         
-        DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
-        model.setColumnIdentifiers(new Object[]{"Kota", "Cuaca", "Suhu"});
+        // Tambahkan header ke tabel
+    DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
+    model.setColumnIdentifiers(new Object[]{"Kota", "Cuaca", "Suhu"});
+
+    // Muat kota favorit dari file
+    try {
+        java.io.File file = new java.io.File("DataCuaca/kotaFavorit.txt");
+        if (file.exists()) {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                cmbPilihKota.addItem(line); // Tambahkan kota ke ComboBox
+            }
+            reader.close();
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Gagal memuat daftar kota favorit: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }
 
@@ -343,6 +359,13 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
         if (!isExist) {
             cmbPilihKota.addItem(kota);
             JOptionPane.showMessageDialog(this, "Kota berhasil ditambahkan ke daftar favorit!");
+
+            // Simpan kota ke file
+            try (FileWriter writer = new FileWriter("DataCuaca/kotaFavorit.txt", true)) { // 'true' untuk append
+                writer.append(kota + "\n");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan kota ke file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Kota sudah ada di daftar favorit!", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
