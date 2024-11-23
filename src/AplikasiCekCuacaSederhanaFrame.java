@@ -22,6 +22,10 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
      */
     public AplikasiCekCuacaSederhanaFrame() {
         initComponents();
+        
+        DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
+        model.setColumnIdentifiers(new Object[]{"Kota", "Cuaca", "Suhu"});
+
     }
 
     /**
