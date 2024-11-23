@@ -374,7 +374,7 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
 
     // Array cuaca dan suhu yang akan dipilih secara random
     String[] cuacaArray = {"Cerah", "Hujan", "Berawan", "Gerimis", "Badai"};
-    String[] suhuArray = {"25°C", "30°C", "28°C", "33°C", "22°C"};
+    String[] suhuArray = {"25°C", "30°C", "28°C", "33°C", "22°C", "35°C", "27°C", "29°C", "26°C", "32°C", "31°C", "24°C", "20°C", "21°C", "23°C", "34°C", "36°C", "37°C", "38°C", "40°C"};
 
     // Pilih cuaca dan suhu secara random
     java.util.Random random = new java.util.Random();
