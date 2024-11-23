@@ -1,5 +1,9 @@
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -335,7 +339,19 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahFavoritActionPerformed
 
     private void btnMuatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuatDataActionPerformed
-        // TODO add your handling code here:
+        try {
+        BufferedReader reader = new BufferedReader(new FileReader("dataCuaca.csv"));
+        DefaultTableModel model = (DefaultTableModel) tblDataCuaca.getModel();
+        model.setRowCount(0); // Hapus semua baris sebelumnya
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            model.addRow(data);
+        }
+        reader.close();
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Gagal membaca file data cuaca: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnMuatDataActionPerformed
 
     private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
