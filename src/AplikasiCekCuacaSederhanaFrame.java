@@ -178,6 +178,11 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
         btnCekCuaca.setFont(new java.awt.Font("Footlight MT Light", 1, 12)); // NOI18N
         btnCekCuaca.setText("Cek Cuaca");
         btnCekCuaca.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCekCuaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekCuacaActionPerformed(evt);
+            }
+        });
 
         btnSimpan.setBackground(new java.awt.Color(227, 142, 73));
         btnSimpan.setFont(new java.awt.Font("Footlight MT Light", 1, 12)); // NOI18N
@@ -332,6 +337,18 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     private void btnMuatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuatDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMuatDataActionPerformed
+
+    private void btnCekCuacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekCuacaActionPerformed
+        String kota = txtCariNamaKota.getText();
+    if (kota.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Masukkan nama kota terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    // Contoh data statis, ubah dengan integrasi API
+    lblCuaca.setText("Cerah");
+    lblSuhu.setText("30°C");
+    JOptionPane.showMessageDialog(this, "Cuaca berhasil diperbarui untuk kota: " + kota);
+    }//GEN-LAST:event_btnCekCuacaActionPerformed
 
     /**
      * @param args the command line arguments
