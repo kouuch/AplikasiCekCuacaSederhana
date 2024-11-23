@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -192,6 +193,11 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
         btnSimpan.setFont(new java.awt.Font("Footlight MT Light", 1, 12)); // NOI18N
         btnSimpan.setText("Simpan");
         btnSimpan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -365,6 +371,15 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     lblSuhu.setText("30°C");
     JOptionPane.showMessageDialog(this, "Cuaca berhasil diperbarui untuk kota: " + kota);
     }//GEN-LAST:event_btnCekCuacaActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        try (FileWriter writer = new FileWriter("dataCuaca.csv", true)) {
+        writer.append(txtCariNamaKota.getText() + "," + lblCuaca.getText() + "," + lblSuhu.getText() + "\n");
+        JOptionPane.showMessageDialog(this, "Data cuaca berhasil disimpan ke file!");
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
