@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -306,7 +309,24 @@ public class AplikasiCekCuacaSederhanaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCariNamaKotaActionPerformed
 
     private void btnTambahFavoritActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahFavoritActionPerformed
-        // TODO add your handling code here:
+        String kota = txtCariNamaKota.getText();
+    if (kota.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nama kota tidak boleh kosong!", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        boolean isExist = false;
+        for (int i = 0; i < cmbPilihKota.getItemCount(); i++) {
+            if (cmbPilihKota.getItemAt(i).equalsIgnoreCase(kota)) {
+                isExist = true;
+                break;
+            }
+        }
+        if (!isExist) {
+            cmbPilihKota.addItem(kota);
+            JOptionPane.showMessageDialog(this, "Kota berhasil ditambahkan ke daftar favorit!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Kota sudah ada di daftar favorit!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_btnTambahFavoritActionPerformed
 
     private void btnMuatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuatDataActionPerformed
